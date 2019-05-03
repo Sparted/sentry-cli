@@ -130,7 +130,13 @@ pub fn get_react_native_appcenter_release(
     package: &AppCenterPackage,
     platform: &str,
     bundle_id_override: Option<&str>,
+    release_name_override: Option<&str>,
 ) -> Result<String, Error> {
+
+    if (release_name_override) {
+        return Ok(format!(release_name_override))
+    }
+
     if let Some(bundle_id) = bundle_id_override {
         return Ok(format!("{}-codepush:{}", bundle_id, package.label));
     }
