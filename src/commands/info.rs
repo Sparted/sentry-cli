@@ -25,7 +25,7 @@ pub struct ConfigStatus {
 }
 
 pub fn make_app<'a, 'b: 'a>(app: App<'a, 'b>) -> App<'a, 'b> {
-    app.about("Print information about the Sentry server.")
+    app.about("Print information about the Sentry server 42.")
         .arg(Arg::with_name("quiet").short("q").long("quiet").help(
             "Do not output anything, just report a status \
              code for correct config.",
