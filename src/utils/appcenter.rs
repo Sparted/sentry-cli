@@ -134,7 +134,14 @@ pub fn get_react_native_appcenter_release(
 ) -> Result<String, Error> {
     let release_name_ovrr = release_name_override.unwrap_or("");
 
+    println!(
+        "On entre bien ici"
+    );
+
     if (release_name_override != "") {
+        println!(
+            "PIci par hsard ?"
+        );
         return Ok(format!(release_name_ovrr))
     }
 
@@ -146,6 +153,9 @@ pub fn get_react_native_appcenter_release(
         if !cfg!(target_os = "macos") {
             bail!("AppCenter codepush releases for iOS require macOS if no bundle ID is specified");
         }
+        println!(
+            "Puis ensuite ici"
+        );
 
         let mut opts = MatchOptions::new();
         opts.case_sensitive = false;
@@ -155,6 +165,12 @@ pub fn get_react_native_appcenter_release(
                 let pi = XcodeProjectInfo::from_path(&entry)?;
                 if let Some(ipl) = InfoPlist::from_project_info(&pi)? {
                     if let Some(release_name) = get_xcode_release_name(Some(ipl))? {
+                        if (release_name_override != "") {
+                            println!(
+                                "Au moins la"
+                            );
+                            return Ok(format!(release_name_ovrr))
+                        }
                         return Ok(format!("{}-codepush:{}", release_name, package.label));
                     }
                 }
@@ -168,6 +184,9 @@ pub fn get_react_native_appcenter_release(
             if let Ok(android_folder) = here.join("android").metadata();
             if android_folder.is_dir();
             then {
+                if (release_name_override != "") {
+                    return Ok(format!(release_name_ovrr))
+                }
                 if let Some(release_name) = infer_gradle_release_name(Some(here.join("android")))? {
                     return Ok(format!("{}-codepush:{}", release_name, package.label));
                 } else {
