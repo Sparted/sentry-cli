@@ -132,9 +132,10 @@ pub fn get_react_native_appcenter_release(
     bundle_id_override: Option<&str>,
     release_name_override: Option<&str>,
 ) -> Result<String, Error> {
+    let release_name_ovrr = release_name_override.unwrap_or("");
 
-    if (release_name_override) {
-        return Ok(format!(release_name_override))
+    if (release_name_override != "") {
+        return Ok(format!(release_name_ovrr))
     }
 
     if let Some(bundle_id) = bundle_id_override {

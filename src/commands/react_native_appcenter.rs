@@ -35,6 +35,12 @@ pub fn make_app<'a, 'b: 'a>(app: App<'a, 'b>) -> App<'a, 'b> {
                 ),
         )
         .arg(
+            Arg::with_name("release_name")
+                .value_name("RELEASE_NAME")
+                .long("release-name")
+                .help("Override release name"),
+        )
+        .arg(
             Arg::with_name("print_release_name")
                 .long("print-release-name")
                 .help("Print the release name instead."),
@@ -60,12 +66,6 @@ pub fn make_app<'a, 'b: 'a>(app: App<'a, 'b>) -> App<'a, 'b> {
                 .required(true)
                 .multiple(true)
                 .help("A list of folders with assets that should be processed."),
-        )
-        .arg(
-            Arg::with_name("release_name")
-                .value_name("RELEASE_NAME")
-                .long("release-name")
-                .help("Override release name"),
         )
 }
 
