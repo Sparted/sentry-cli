@@ -61,12 +61,6 @@ pub fn make_app<'a, 'b: 'a>(app: App<'a, 'b>) -> App<'a, 'b> {
                 .multiple(true)
                 .help("A list of folders with assets that should be processed."),
         )
-        .arg(
-            Arg::with_name("release_name")
-                .value_name("RELEASE_NAME")
-                .long("release-name")
-                .help("Override release name"),
-        )
 }
 
 pub fn execute<'a>(matches: &ArgMatches<'a>) -> Result<(), Error> {
@@ -89,7 +83,7 @@ pub fn execute<'a>(matches: &ArgMatches<'a>) -> Result<(), Error> {
 
     let package = get_appcenter_package(app, deployment)?;
     let release =
-        get_react_native_appcenter_release(&package, platform, matches.value_of("bundle_id"), matches.value_of("release_name"))?;
+        get_react_native_appcenter_release(&package, platform, matches.value_of("bundle_id"))?;
     if print_release_name {
         println!("{}", release);
         return Ok(());
